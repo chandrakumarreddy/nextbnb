@@ -3,3 +3,5 @@ const House = () => (
     <p>House</p>
   </div>
 );
+
+export default House;
