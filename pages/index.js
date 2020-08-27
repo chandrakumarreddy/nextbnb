@@ -16,7 +16,7 @@ export default function Index() {
     <div>
       <Head>
         <title>Home page</title>
-        <meta charset="UTF-8" />
+        <meta charSet="UTF-8" />
         <meta name="description" content="Stay away room rentals" />
       </Head>
       <h2>Places to Stay</h2>
