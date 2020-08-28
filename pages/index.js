@@ -3,6 +3,7 @@ import Head from "next/head";
 import styled from "styled-components";
 import House from "../components/House";
 import houses from "../data/houses.json";
+import Layout from "../components/Layout";
 
 const Houses = styled.div`
   display: grid;
@@ -13,7 +14,7 @@ const Houses = styled.div`
 
 export default function Index() {
   return (
-    <div>
+    <Layout>
       <Head>
         <title>Home page</title>
         <meta charSet="UTF-8" />
@@ -25,6 +26,6 @@ export default function Index() {
           <House key={house.id} {...house} />
         ))}
       </Houses>
-    </div>
+    </Layout>
   );
 }
