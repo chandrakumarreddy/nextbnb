@@ -16,9 +16,9 @@ export const numberOfNightsBetweenDates = (startDate, endDate) => {
   const newStartDate = new Date(startDate);
   const newEndDate = new Date(endDate);
   let count = 0;
-  while (endDate > startDate) {
+  while (newEndDate > newStartDate) {
     count++;
-    newEndDate.setDate(newStartDate.getDate() + 1);
+    newStartDate.setDate(newStartDate.getDate() + 1);
   }
   return count;
 };

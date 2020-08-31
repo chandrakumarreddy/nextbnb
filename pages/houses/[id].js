@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import houses from "../../data/houses.json";
 import Layout from "../../components/Layout";
 import Datepicker from "../../components/base/Datepicker";
 import { numberOfNightsBetweenDates } from "../../utils/dates";
+import Modal from "../../components/base/Modal";
 
 const Img = styled.img`
   background-color: gray;
@@ -41,6 +42,18 @@ const DatesContainer = styled.div`
   }
 `;
 
+const ReserveButton = styled.button`
+  background-color: rgb(255, 90, 95);
+  color: #fff;
+  border: none;
+  font-size: 13px;
+  width: 100%;
+  height: 40px;
+  border-radius: 4px;
+`;
+
+let bookedDays = 1;
+
 const House = ({ house }) => {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(() => {
@@ -49,16 +62,21 @@ const House = ({ house }) => {
     tomorrow.setDate(tomorrow.getDate() + 1);
     return tomorrow;
   });
+  const [dateChosen, setDateChosen] = useState(false);
   const handleStartDate = (day) => {
     setStartDate(day);
-    if (numberOfNightsBetweenDates(day, endDate) < 1) {
+    bookedDays = numberOfNightsBetweenDates(day, endDate);
+    if (bookedDays < 1) {
       const newEndDate = new Date(day);
       newEndDate.setDate(newEndDate.getDate() + 1);
       setEndDate(newEndDate);
     }
+    setDateChosen(true);
   };
   const handleEndDate = (day) => {
     setEndDate(day);
+    bookedDays = numberOfNightsBetweenDates(startDate, day);
+    setDateChosen(true);
   };
   return (
     <Layout>
@@ -102,7 +120,17 @@ const House = ({ house }) => {
               />
             </div>
           </DatesContainer>
+          {dateChosen && (
+            <div>
+              <h2>Price per night</h2>
+              <p>${house.price}</p>
+              <h2>Total price for booking</h2>{" "}
+              <p>${(bookedDays * Number(house.price)).toFixed(2)}</p>
+              <ReserveButton className="reserve">Reserve</ReserveButton>
+            </div>
+          )}
         </StyledAside>
+        <Modal>chandra</Modal>
       </Container>
     </Layout>
   );
