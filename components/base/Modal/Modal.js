@@ -4,6 +4,7 @@ import { ModalContainer, ModalContent } from "./Modal.css";
 
 const modalRoot =
   typeof document !== "undefined" && document?.getElementById("modal-root");
+
 export default function Modal({ id = "", children, className = "", onClose }) {
   const ref = useRef();
   const [animation, setAnimation] = useState(null);
@@ -27,19 +28,23 @@ export default function Modal({ id = "", children, className = "", onClose }) {
       onClose();
     }
   };
-  // const handleClick = (e) => {
-  //   e.preventDefault();
-  //   setAnimation("out");
-  // };
+  const handleClick = (e) => {
+    e.preventDefault();
+    setAnimation("out");
+  };
+  const childClick = (e) => {
+    e.stopPropagation();
+  };
   return ReactDom.createPortal(
     <ModalContainer
       id={id}
       role="dialog"
       //   modalSize={size}
+      onClick={handleClick}
       onTransitionEnd={transitionEnd}
       className={`${className} fade-${animation}`}
     >
-      <ModalContent>{children}</ModalContent>
+      <ModalContent onClick={childClick}>{children}</ModalContent>
     </ModalContainer>,
     modalRoot
   );

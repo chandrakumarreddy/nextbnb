@@ -6,6 +6,7 @@ import Layout from "../../components/Layout";
 import Datepicker from "../../components/base/Datepicker";
 import { numberOfNightsBetweenDates } from "../../utils/dates";
 import Modal from "../../components/base/Modal/Modal";
+import Register from "../../components/Auth/Register";
 
 const Img = styled.img`
   background-color: gray;
@@ -133,7 +134,11 @@ const House = ({ house }) => {
             </div>
           )}
         </StyledAside>
-        {open && <Modal onClose={() => setOpen(false)}>chandra</Modal>}
+        {open && (
+          <Modal onClose={() => setOpen(false)}>
+            <Register />
+          </Modal>
+        )}
       </Container>
     </Layout>
   );

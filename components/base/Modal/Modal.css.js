@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const ModalContainer = styled.div`
+  cursor: pointer;
   position: fixed;
   top: 0;
   left: 0;
@@ -21,6 +22,7 @@ export const ModalContainer = styled.div`
 
 export const ModalContent = styled.div`
   position: absolute;
+  cursor: auto;
   top: 50%;
   left: 50%;
   max-width: 32em;
