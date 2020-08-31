@@ -5,7 +5,7 @@ import houses from "../../data/houses.json";
 import Layout from "../../components/Layout";
 import Datepicker from "../../components/base/Datepicker";
 import { numberOfNightsBetweenDates } from "../../utils/dates";
-import Modal from "../../components/base/Modal";
+import Modal from "../../components/base/Modal/Modal";
 
 const Img = styled.img`
   background-color: gray;
@@ -56,6 +56,7 @@ let bookedDays = 1;
 
 const House = ({ house }) => {
   const [startDate, setStartDate] = useState(new Date());
+  const [open, setOpen] = useState(false);
   const [endDate, setEndDate] = useState(() => {
     const today = new Date();
     const tomorrow = new Date(today);
@@ -126,11 +127,13 @@ const House = ({ house }) => {
               <p>${house.price}</p>
               <h2>Total price for booking</h2>{" "}
               <p>${(bookedDays * Number(house.price)).toFixed(2)}</p>
-              <ReserveButton className="reserve">Reserve</ReserveButton>
+              <ReserveButton className="reserve" onClick={() => setOpen(true)}>
+                Reserve
+              </ReserveButton>
             </div>
           )}
         </StyledAside>
-        <Modal>chandra</Modal>
+        {open && <Modal onClose={() => setOpen(false)}>chandra</Modal>}
       </Container>
     </Layout>
   );

@@ -1,15 +1,25 @@
 import styled from "styled-components";
 
-const ModalContainer = styled.div`
+export const ModalContainer = styled.div`
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.3);
+  transition: opacity linear 0.15s;
+  opacity: 0;
+  &.fade-in {
+    opacity: 1;
+    transition: opacity linear 0.15s;
+  }
+  &.fade-out {
+    opacity: 0;
+    transition: opacity linear 0.15s;
+  }
 `;
 
-const ModalContent = styled.div`
+export const ModalContent = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -20,12 +30,5 @@ const ModalContent = styled.div`
   border-radius: 0.2em;
   background: white;
   transform: translate(-50%, -50%);
+  z-index: 2000;
 `;
-
-export default function Modal({ children }) {
-  return (
-    <ModalContainer>
-      <ModalContent>{children}</ModalContent>
-    </ModalContainer>
-  );
-}
