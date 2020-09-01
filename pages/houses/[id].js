@@ -1,14 +1,22 @@
-import { useState, useCallback } from "react";
+import { useState } from "react";
 import Head from "next/head";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 import houses from "../../data/houses.json";
 import Layout from "../../components/Layout";
-import Datepicker from "../../components/base/Datepicker";
 import { numberOfNightsBetweenDates } from "../../utils/dates";
 import Modal from "../../components/base/Modal/Modal";
-import Register from "../../components/Auth/Register";
-import Login from "../../components/Auth/Login";
 import { useSelector } from "react-redux";
+
+const Datepicker = dynamic(() => import("../../components/base/Datepicker"), {
+  ssr: false,
+});
+const Register = dynamic(() => import("../../components/Auth/Register"), {
+  ssr: false,
+});
+const Login = dynamic(() => import("../../components/Auth/Login"), {
+  ssr: false,
+});
 
 const Img = styled.img`
   background-color: gray;
