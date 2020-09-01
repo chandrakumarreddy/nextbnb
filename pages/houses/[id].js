@@ -7,6 +7,8 @@ import Datepicker from "../../components/base/Datepicker";
 import { numberOfNightsBetweenDates } from "../../utils/dates";
 import Modal from "../../components/base/Modal/Modal";
 import Register from "../../components/Auth/Register";
+import Login from "../../components/Auth/Login";
+import { useSelector } from "react-redux";
 
 const Img = styled.img`
   background-color: gray;
@@ -56,6 +58,7 @@ const ReserveButton = styled.button`
 let bookedDays = 1;
 
 const House = ({ house }) => {
+  const modalType = useSelector(({ modal }) => modal);
   const [startDate, setStartDate] = useState(new Date());
   const [open, setOpen] = useState(false);
   const [endDate, setEndDate] = useState(() => {
@@ -136,7 +139,7 @@ const House = ({ house }) => {
         </StyledAside>
         {open && (
           <Modal onClose={() => setOpen(false)}>
-            <Register />
+            {modalType === "login" ? <Login /> : <Register />}
           </Modal>
         )}
       </Container>
@@ -144,10 +147,10 @@ const House = ({ house }) => {
   );
 };
 
-export function getServerSideProps({ query }) {
+House.getInitialProps = ({ query }) => {
   const { id } = query;
   const house = houses.find((_house) => _house.id === id);
-  return { props: { house } };
-}
+  return { house };
+};
 
 export default House;
