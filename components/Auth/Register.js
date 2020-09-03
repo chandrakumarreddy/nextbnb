@@ -4,7 +4,7 @@ import { updateModal } from "../../redux/actions/modal";
 
 export default function Register() {
   const dispatch = useDispatch();
-  const handleLoginClick = (e) => {
+  const handleRegisterClick = (e) => {
     e.preventDefault();
     dispatch(updateModal("login"));
   };
@@ -23,7 +23,7 @@ export default function Register() {
       </form>
       <p>
         Already have an account?{" "}
-        <a href="" onClick={handleLoginClick}>
+        <a href="" onClick={handleRegisterClick}>
           Log in
         </a>
       </p>
