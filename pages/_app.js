@@ -1,7 +1,6 @@
-import withRedux from "next-redux-wrapper";
 import { Provider } from "react-redux";
 import { createGlobalStyle } from "styled-components";
-import store from "../redux/store";
+import { useStore } from "../redux/store";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -15,7 +14,8 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-function App({ Component, pageProps, store }) {
+function App({ Component, pageProps }) {
+  const store = useStore(pageProps.initialReduxState);
   return (
     <>
       <GlobalStyle />
@@ -26,11 +26,4 @@ function App({ Component, pageProps, store }) {
   );
 }
 
-App.getInitialProps = async ({ Component, ctx }) => {
-  const pageProps = Component?.getInitialProps
-    ? await Component.getInitialProps(ctx)
-    : {};
-  return { pageProps };
-};
-
-export default withRedux(store)(App);
+export default App;

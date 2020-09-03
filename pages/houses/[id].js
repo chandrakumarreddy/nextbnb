@@ -155,10 +155,10 @@ const House = ({ house }) => {
   );
 };
 
-House.getInitialProps = ({ query }) => {
+export function getServerSideProps({ query }) {
   const { id } = query;
   const house = houses.find((_house) => _house.id === id);
-  return { house };
-};
+  return { props: { house } };
+}
 
 export default House;
