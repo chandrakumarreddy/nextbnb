@@ -3,7 +3,6 @@ import Head from "next/head";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import houses from "../../data/houses.json";
-import Layout from "../../components/Layout";
 import { numberOfNightsBetweenDates } from "../../utils/dates";
 import Modal from "../../components/base/Modal/Modal";
 import { useSelector } from "react-redux";
@@ -92,66 +91,64 @@ const House = ({ house }) => {
     setDateChosen(true);
   };
   return (
-    <Layout>
-      <Container>
-        <Head>
-          <title>{house.title}</title>
-          <meta name="description" content={house.description} />
-          <link
-            rel="stylesheet"
-            href="https://unpkg.com/react-day-picker/lib/style.css"
-          />
-        </Head>
-        <article>
-          <Img src={house.picture} width="100%" alt={house.title} />
-          <p>
-            {house.type}-{house.town}
-          </p>
-          <p>{house.title}</p>
-          <p>
-            {house.rating} ({house.reviewsCount})
-          </p>
-        </article>
-        <StyledAside>
-          <h2>Add dates to places</h2>
-          <DatesContainer>
-            <div>
-              <Label>From </Label>
-              <Datepicker
-                id="from"
-                value={startDate}
-                onChange={handleStartDate}
-              />
-            </div>
-            <div>
-              <Label>To </Label>
-              <Datepicker
-                id="to"
-                value={endDate}
-                onChange={handleEndDate}
-                disabled={[startDate, { before: startDate }]}
-              />
-            </div>
-          </DatesContainer>
-          {dateChosen && (
-            <div>
-              <h2>Price per night</h2>
-              <p>${house.price}</p>
-              <h2>Total price for booking</h2>{" "}
-              <p>${(bookedDays * Number(house.price)).toFixed(2)}</p>
-              <ReserveButton className="reserve" onClick={() => setOpen(true)}>
-                Reserve
-              </ReserveButton>
-            </div>
-          )}
-        </StyledAside>
-        {open && (
-          <Modal onClose={() => setOpen(false)}>
-            {modalType === "login" ? <Login /> : <Register />}
-          </Modal>
+    <Container>
+      <Head>
+        <title>{house.title}</title>
+        <meta name="description" content={house.description} />
+        <link
+          rel="stylesheet"
+          href="https://unpkg.com/react-day-picker/lib/style.css"
+        />
+      </Head>
+      <article>
+        <Img src={house.picture} width="100%" alt={house.title} />
+        <p>
+          {house.type}-{house.town}
+        </p>
+        <p>{house.title}</p>
+        <p>
+          {house.rating} ({house.reviewsCount})
+        </p>
+      </article>
+      <StyledAside>
+        <h2>Add dates to places</h2>
+        <DatesContainer>
+          <div>
+            <Label>From </Label>
+            <Datepicker
+              id="from"
+              value={startDate}
+              onChange={handleStartDate}
+            />
+          </div>
+          <div>
+            <Label>To </Label>
+            <Datepicker
+              id="to"
+              value={endDate}
+              onChange={handleEndDate}
+              disabled={[startDate, { before: startDate }]}
+            />
+          </div>
+        </DatesContainer>
+        {dateChosen && (
+          <div>
+            <h2>Price per night</h2>
+            <p>${house.price}</p>
+            <h2>Total price for booking</h2>{" "}
+            <p>${(bookedDays * Number(house.price)).toFixed(2)}</p>
+            <ReserveButton className="reserve" onClick={() => setOpen(true)}>
+              Reserve
+            </ReserveButton>
+          </div>
         )}
-      </Container>
-    </Layout>
+      </StyledAside>
+      {open && (
+        <Modal onClose={() => setOpen(false)}>
+          {modalType === "login" ? <Login /> : <Register />}
+        </Modal>
+      )}
+    </Container>
   );
 };
 

@@ -1,5 +1,6 @@
 import { Provider } from "react-redux";
 import { createGlobalStyle } from "styled-components";
+import Layout from "../components/Layout";
 import { useStore } from "../redux/store";
 
 const GlobalStyle = createGlobalStyle`
@@ -20,10 +21,18 @@ function App({ Component, pageProps }) {
     <>
       <GlobalStyle />
       <Provider store={store}>
-        <Component {...pageProps} />
+        <Layout>
+          <Component {...pageProps} />
+        </Layout>
       </Provider>
     </>
   );
 }
+
+App.getInitialProps = ({ Component, ctx }) => {
+  return {
+    pageProps: Component?.getInitialProps?.(ctx) ?? {},
+  };
+};
 
 export default App;
