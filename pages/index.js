@@ -2,7 +2,7 @@ import React from "react";
 import Head from "next/head";
 import styled from "styled-components";
 import House from "../components/House";
-import houses from "../data/houses.json";
+import houses from "@data/houses.json";
 
 const Houses = styled.div`
   display: grid;

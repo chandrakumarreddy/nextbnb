@@ -1,6 +1,6 @@
 import { Container, Input, Button as RegisterButton } from "./styled.css";
 import { useDispatch } from "react-redux";
-import { updateModal } from "../../redux/actions/modal";
+import { updateModal } from "@redux/actions/modal";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -8,10 +8,13 @@ export default function Register() {
     e.preventDefault();
     dispatch(updateModal("login"));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
   return (
     <Container>
-      <h2>Register </h2>
-      <form>
+      <h2>Register</h2>
+      <form onSubmit={handleSubmit}>
         <Input id="email" type="email" placeholder="Email address" />
         <Input id="password" type="password" placeholder="Password" />
         <Input
@@ -19,7 +22,7 @@ export default function Register() {
           type="password"
           placeholder="Enter password again"
         />
-        <RegisterButton>Sign up</RegisterButton>
+        <RegisterButton type="submit">Sign up</RegisterButton>
       </form>
       <p>
         Already have an account?{" "}

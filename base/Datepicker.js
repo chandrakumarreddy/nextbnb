@@ -1,6 +1,6 @@
 import DayPickerInput from "react-day-picker/DayPickerInput";
 import dateFnsFormat from "date-fns/format";
-import { format, parseDate, formatDate } from "../../utils/dates";
+import { format, parseDate, formatDate } from "@utils/dates";
 
 export default function Datepicker({ value, onChange, disabled }) {
   return (

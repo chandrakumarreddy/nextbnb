@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { createGlobalStyle } from "styled-components";
-import Layout from "../components/Layout";
-import { useStore } from "../redux/store";
+import Layout from "@components/Layout";
+import { useStore } from "@redux/store";
 
 const GlobalStyle = createGlobalStyle`
   body {

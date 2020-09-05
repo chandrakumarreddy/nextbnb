@@ -1,19 +1,19 @@
 import { useState } from "react";
 import Head from "next/head";
-import styled from "styled-components";
-import dynamic from "next/dynamic";
-import houses from "../../data/houses.json";
-import { numberOfNightsBetweenDates } from "../../utils/dates";
-import Modal from "../../components/base/Modal/Modal";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
+import dynamic from "@base/Dynamic/Dynamic";
+import houses from "@data/houses.json";
+import { numberOfNightsBetweenDates } from "@utils/dates";
+import Modal from "@base/Modal/Modal";
 
-const Datepicker = dynamic(() => import("../../components/base/Datepicker"), {
+const Datepicker = dynamic(() => import("@base/Datepicker"), {
   ssr: false,
 });
-const Register = dynamic(() => import("../../components/Auth/Register"), {
+const Register = dynamic(() => import("@components/Auth/Register"), {
   ssr: false,
 });
-const Login = dynamic(() => import("../../components/Auth/Login"), {
+const Login = dynamic(() => import("@components/Auth/Login"), {
   ssr: false,
 });
 
