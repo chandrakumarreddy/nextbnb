@@ -3,9 +3,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import reducers from './reducers';
-// import callApiMiddleware from './middlewares/callApiMiddleware';
+import callApiMiddleware from './middlewares/callApiMiddleware';
 
-const middlewares = applyMiddleware(thunkMiddleware);
+const middlewares = applyMiddleware(thunkMiddleware, callApiMiddleware);
 
 const composedMiddleware =
     process.env.NODE_ENV === 'production' ? middlewares : composeWithDevTools(middlewares);
