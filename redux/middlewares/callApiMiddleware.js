@@ -1,5 +1,5 @@
-export default function callApiMiddleware(data) {
-  return (store) => (next) => (action) => {
-    return next(action);
-  };
+export default function callApiMiddleware() {
+    return () => (next) => (action) => {
+        return next(action);
+    };
 }
