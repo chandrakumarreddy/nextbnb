@@ -1,6 +1,5 @@
-import fetch from 'fetch';
 import { API } from '../actions/types';
-import { apiStart } from '../actions/api';
+import { apiStart, apiEnd } from '../actions/api';
 
 function checkStatus(res) {
     if (res.ok) return res;
@@ -13,9 +12,8 @@ export default function callApiMiddleware({ dispatch }) {
     return (next) => (action) => {
         if (action.type !== API) return next(action);
         const { url, method, data, onSuccess, onFailure, label } = action.payload;
-        const dataOrParams = ['GET', 'DELETE'].includes(method) ? 'params' : 'data';
         if (label) {
-            dispatch(apiStart(`${label}_REQUEST`));
+            dispatch(apiStart(`${label}_START`));
         }
         const headers = {
             authorization: `Bearer `,
@@ -28,6 +26,16 @@ export default function callApiMiddleware({ dispatch }) {
             credentials: 'same-origin'
         })
             .then(checkStatus)
-            .then();
+            .then(async (res) => {
+                const resJson = await res.json();
+                dispatch(onSuccess(resJson));
+                return resJson;
+            })
+            .catch((err) => {
+                dispatch(onFailure(err));
+            })
+            .finally(() => {
+                dispatch(apiEnd(`${label}_END`));
+            });
     };
 }

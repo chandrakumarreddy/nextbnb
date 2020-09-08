@@ -7,6 +7,8 @@ import dynamic from '@base/Dynamic/Dynamic';
 import houses from '@data/houses.json';
 import { numberOfNightsBetweenDates } from '@utils/dates';
 import Modal from '@base/Modal/Modal';
+import { wrapper } from '@redux/store';
+import { dummy } from '@redux/actions/dummy';
 
 const Datepicker = dynamic(() => import('@base/Datepicker'), {
     ssr: false
@@ -146,11 +148,12 @@ const House = ({ house }) => {
     );
 };
 
-export function getServerSideProps({ query }) {
+House.getInitialProps = async ({ store, query }) => {
     const { id } = query;
+    await store.dispatch(dummy(2));
     const house = houses.find((_house) => _house.id === id);
-    return { props: { house } };
-}
+    return { house };
+};
 
 House.propTypes = {
     house: PropTypes.shape({
@@ -166,4 +169,4 @@ House.propTypes = {
     })
 };
 
-export default House;
+export default wrapper.withRedux(House);

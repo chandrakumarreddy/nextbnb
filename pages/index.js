@@ -1,8 +1,10 @@
 import React from 'react';
 import Head from 'next/head';
 import styled from 'styled-components';
-import House from '../components/House';
 import houses from '@data/houses.json';
+import { dummy } from '@redux/actions/dummy';
+import House from '../components/House';
+import { wrapper } from '@redux/store';
 
 const Houses = styled.div`
     display: grid;
@@ -11,7 +13,7 @@ const Houses = styled.div`
     grid-gap: 40px;
 `;
 
-export default function Index() {
+function Index() {
     return (
         <>
             <Head>
@@ -28,3 +30,10 @@ export default function Index() {
         </>
     );
 }
+
+Index.getInitialProps = async ({ store }) => {
+    await store.dispatch(dummy(1));
+    return { props: {} };
+};
+
+export default wrapper.withRedux(Index);

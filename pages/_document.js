@@ -13,10 +13,6 @@ export default class MyDocument extends Document {
         return (
             <html lang="en">
                 <Head>{this.props.styleTags}</Head>
-                <link
-                    href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap"
-                    rel="stylesheet"
-                />
                 <body>
                     <Main />
                     <div id="modal-root" />
